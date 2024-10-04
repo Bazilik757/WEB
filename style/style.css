@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+}
+
+/* Блоки */
+header, nav {
+    padding: 0;
+    margin: 0;
+}
+
+div {
+    padding: 0;
+    margin: 0;
+}
+
+/* Текст */
+html, body {
+    height: 100%;
+    font-family: 'Roboto', sans-serif; /* Подключает Google-шрифт в HTML */
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+}
+
+/* Изображения */
+img {
+    width: 50%;
+    height: auto;
+    margin-right: auto; 
+}
+
+/* Таблицы */
+table {
+    width: 40%;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid #ddd;
+}
+
+/* Ссылки */
+a {
+    margin-right: 20px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif; 
+    font-size: 20px;
+    color: black;
+}
+
+a:hover {
+    color: red;
+}
+
+footer {
+    width: 100%;
+    height:auto;
+    background-color: black;
+    color: white;
+}
+
+footer a {
+    color: white; /* Цвет ссылок в футере */
+}
+
+footer a:hover {
+    color: lightgray; /* Цвет ссылок в футере при наведении */
+}
+
+nav a {
+    text-decoration: none;
+    color:black;
+}
+
+a.active{
+    color: tomato;
+    margin-left: 20px; /* Убедитесь, что состояние активной ссылки также имеет отступ слева */
+}
+
+main{
+    flex:1;
+}
+@media (min-width: 1px) and (max-width: 400px){
+    body>main>section>table{
+        font-size: 12px;
+    }
+}
+@media (min-width:401px) and (max-width:600px){
+    body>header>h1{
+        text-align: center;
+    }
+    body>header>nav{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    main.a{
+        font-size: 14px;
+    }
+    body>main>section>img{
+        width: 100%;
+        padding-right: 20px;
+    }
+    body>main>section>table{
+        font-size: 14px;
+    }
+}
+@media (min-width:601px) and (max-width:800px){
+    body>main>section>img{
+        width: 500px;
+        padding-right: 20px;
+    }
+    body>header>nav{
+        display: flex;
+        justify-content: space-between;
+    }
+
+}
