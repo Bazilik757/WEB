@@ -16,7 +16,7 @@ div {
 /* Текст */
 html, body {
     height: 100%;
-    font-family: 'Afacad Flux', sans-serif; /* Подключает Google-шрифт в HTML */
+    font-family: 'Afacad+Flux', sans-serif; /* Подключает Google-шрифт в HTML */
     font-size: 16px;
     color: #333;
     margin: 0;
@@ -37,20 +37,19 @@ table {
 
 td, th {
     border: 1px solid #ddd;
-    text-align: left; /* Добавлено свойство text-align */
 }
 
 /* Ссылки */
 a {
     margin-right: 20px;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif; 
+    font-family: 'Afacad+Flux', sans-serif; 
     font-size: 20px;
     color: black;
 }
 
 a:hover {
-    color: rgb(231, 48, 15);
+    color: red;
 }
 
 footer {
@@ -81,7 +80,6 @@ a.active{
 main{
     flex:1;
 }
-
 @media (min-width: 1px) and (max-width: 400px){
     body>main>section>table{
         font-size: 12px;
@@ -116,4 +114,5 @@ main{
         display: flex;
         justify-content: space-between;
     }
+
 }
