@@ -1,0 +1,110 @@
+section>div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: 40px;
+    gap: 10px;
+
+}
+section>div>div{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex:1 1 300px;
+    align-items: center;
+    gap: 15px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 40px;
+    padding-right: 50px;
+    border-radius: 35px;
+    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+    cursor:pointer;
+    background-color: white;
+    justify-content: space-between; /*Распределяет кнопки равномерно */
+    
+}
+h2{
+    margin-left: 40px;
+}
+section>div>div>p{
+    line-height: 1;
+}
+section>div>div:hover{
+    border: 2px solid tomato;
+}
+section>div>div>button:hover{
+    background-color: lightgray;
+}
+section>div>div>img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    border-radius: 35px;
+}
+.price{
+    font-size: 20px;
+    padding: 0;
+    margin:0
+}
+.name{
+    font-size:20px;
+    padding: 0;
+    margin: 0;
+}
+.weight{
+    color:grey;
+    padding: 0;
+    margin: 10;
+}
+section>div>div>button{
+    background-color: #f1eee9;
+    border-color: #f1eee9;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+ @media (min-width: 1px) and (max-width:799px){
+    h1 {
+        text-align: center;                  
+    }
+
+    section>div>div{
+        display: flex;                      
+        flex-direction: column;              
+        align-items: center; 
+    }
+    
+
+    nav > a {
+        font-size: 20px;                    
+    }
+    
+    section > h2 {
+        text-align: center;                 
+    }
+    
+
+    section > div {
+        display: grid;                       
+        grid-template-columns: 1fr;                
+    }
+} 
+
+@media (min-width: 800px){
+    section>div>div{
+        display: flex;                       
+        justify-content: space-between;  
+        align-items: baseline;      
+    }
+
+    section>div{
+        display: grid;                       
+        grid-template-columns: repeat(3, 1fr); 
+    }
+} 
