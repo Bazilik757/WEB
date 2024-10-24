@@ -116,3 +116,21 @@ main{
     }
 
 }
+
+@media (min-width: 1px) and (max-width: 400px) {
+    input[type="text"], textarea {
+        width: 100%;
+    }
+}
+
+@media (min-width: 401px) and (max-width: 600px) {
+    input[type="text"], textarea {
+        width: 80%;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 800px) {
+    input[type="text"], textarea {
+        width: 60%;
+    }
+}
