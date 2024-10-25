@@ -69,6 +69,8 @@ section>div>div>button{
     border-radius: 10px;
     cursor: pointer;
 }
+
+
 #order {
     display: flex;
     flex-direction: column;
@@ -97,22 +99,24 @@ select {
     height: 35px;
     font-size: 14px;
     padding: 8px;
+    display: block;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
+
 textarea {
     height: 70px;
 }
 .button-containers {
     display: flex;
-    justify-content: center; /* Перемещает кнопки вправо */
-    gap: 10px; /* Расстояние между кнопками */
+    justify-content: center; 
+    gap: 10px; 
 }
 
 button {
-    padding: 10px 20px; /* Внутренний отступ */
+    padding: 10px 20px; 
     font-size: 16px; 
     border: none; 
     border-radius: 5px; 
@@ -121,8 +125,8 @@ button {
 }
 
 button[type="reset"] {
-    background-color: #f44336; /* Цвет фона для кнопки "Сбросить" */
-    color: white; /* Цвет текста */
+    background-color: #f44336; 
+    color: white; 
 }
 
 button[type="reset"]:hover {
@@ -138,8 +142,11 @@ button[type="submit"]:hover {
     background-color: #388E3C; 
 }
 
-
-
+legend {
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-left: 0;
+}
 
 
  @media (min-width: 1px) and (max-width:799px){
