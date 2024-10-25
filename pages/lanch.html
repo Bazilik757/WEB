@@ -102,6 +102,7 @@
                 <h2>Сделать заказ</h2>
                 <form action="https://httpbin.org/post" method="post">
                      <div>
+                        <legend>Ваш заказ</legend>
                         <label for="soup">Суп</label>
                         <select id="soup" name="soup" required>
                             <option value="">-- Выберите суп --</option>
@@ -127,6 +128,7 @@
                         <textarea id="comments" name="comments"></textarea>
                      </div>
                      <div>
+                        <legend>Ваши данные</legend>
                         <label for="name">Имя</label>
                         <input type="text" id="name" name="name" required>
                         
@@ -135,6 +137,8 @@
                         
                         <input type="checkbox" id="subscribe" name="subscribe" checked>
                         <label for="subscribe">Получать информацию о скидках и акциях</label>
+                        
+                        <br>
                         
                         <label for="phone">Номер телефона</label>
                         <input type="tel" id="phone" name="phone" required>
