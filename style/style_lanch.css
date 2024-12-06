@@ -153,6 +153,50 @@ legend {
 .order-type-name {
     font-weight: bold;
 }
+.category {
+    margin-bottom: 20px;
+  }
+  .filters {
+    margin-top: 10px;
+  }
+  .filter-button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .filter-button:hover {
+    background-color: #f0f0f0;
+  }
+  /* Базовый стиль кнопок */
+.filter_button {
+    background-color: #f0f0f0; /* Светло-серый фон */
+    color: #333; /* Темный текст */
+    border: 1px solid #ccc; /* Граница */
+    border-radius: 5px; /* Скругленные углы */
+    padding: 10px 15px; /* Внутренние отступы */
+    cursor: pointer; /* Указатель мыши при наведении */
+    transition: background-color 0.3s, color 0.3s; /* Плавный переход цвета */
+  }
+  
+  /* Цвет кнопки при наведении курсора */
+  .filter_button:hover {
+    background-color: #e0e0e0; /* Темнее основной фон */
+  }
+  
+  /* Активное состояние кнопки (когда фильтр применяется) */
+  .filter_button.active_button {
+    background-color: #007bff; /* Синий фон */
+    color: white; /* Белый текст */
+  }
+  
+  /* При наведении на активную кнопку (активный фильтр) */
+  .filter_button.active_button:hover {
+    background-color: #0056b3; /* Темно-синий фон */
+  }
+
+
+
+
 
 
  @media (min-width: 1px) and (max-width:799px){
