@@ -20,21 +20,59 @@
             </nav>
         </header>
 
-        <main>
-            <section>
-                <h2>Выберите суп</h2>
-                <div id="soup" class="category"></div>
-            </section>
+        <section class="category-container">
+            <h2>Выберите суп</h2>
+            <div class="filters">
+                <!-- Кнопки фильтров с нужными атрибутами -->
+                <button class="filter_button" data-kind="fish" data-active="false">Рыбный</button>
+                <button class="filter_button" data-kind="meat" data-active="false">Мясной</button>
+                <button class="filter_button" data-kind="vegetarian" data-active="false">Вегетарианский</button>
+            </div>
+            <!-- Контейнер для отображения блюд категории "супы" -->
+            <div id="soup" class="dish category"></div>
+        </section>
             
-            <section>
-                <h2>Выберите главное блюдо</h2>
-                <div id="main_dish" class="category"></div>
-            </section>
+        <section class="category-container">
+            <h2>Выберите основное блюдо</h2>
+            <div class="filters">
+                <button class="filter_button" data-kind="fish" data-active="false">Рыбное</button>
+                <button class="filter_button" data-kind="meat" data-active="false">Мясное</button>
+                <button class="filter_button" data-kind="vegetarian" data-active="false">Вегетарианское</button>
+            </div>
+            <div id="main_dish" class="dish category"></div>
+        </section>
 
-            <section>
-                <h2>Выберите напиток</h2>
-                <div id="juice" class="category"></div>
-            </section>
+
+        <section class="category-container">
+            <h2>Выберите салат или стартер</h2>
+            <div class="filters">
+                <button class="filter_button" data-kind="fish" data-active="false">Рыбное</button>
+                <button class="filter_button" data-kind="meat" data-active="false">Мясное</button>
+                <button class="filter_button" data-kind="vegetarian" data-active="false">Вегетарианское</button>
+            </div>
+            <div id="salad_starter" class="dish category"></div>
+        </section>
+
+        <section class="category-container">
+            <h2>Выберите Напиток</h2>
+            <div class="filters">
+                <!-- Кнопки фильтров с нужными атрибутами -->
+                <button class="filter_button" data-kind="cold" data-active="false">Холодное</button>
+                <button class="filter_button" data-kind="hot" data-active="false">Горячее</button>
+            </div>
+            <div id="juice" class="dish category"></div>
+        </section>
+
+        <section class="category-container">
+            <h2>Выберите Десерт</h2>
+            <div class="filters">
+                <!-- Кнопки фильтров с нужными атрибутами -->
+                <button class="filter_button" data-kind="small" data-active="false">Маленькая порция</button>
+                <button class="filter_button" data-kind="average" data-active="false">Средняя порция</button>
+                <button class="filter_button" data-kind="big" data-active="false">Большая порция</button>
+            </div>
+            <div id="dessert" class="dish category"></div>
+        </section>
 
             <section id="order">
                 <h2>Сделать заказ</h2>
@@ -52,10 +90,20 @@
                                 <p class="order-type-description"></p>
                                 <input class="order-type-description" type="hidden" name="main-dish">
                             </div>
+                            <div id="salad_starter_order" class="order-elem">
+                                <p class="order-type-name">Салат/Стартер</p>
+                                <p class="order-type-description"></p>
+                                <input class="order-type-description" type="hidden" name="salad_starter">
+                            </div>
                             <div id="juice_order" class="order-elem">
                                 <p class="order-type-name">Напиток</p>
                                 <p class="order-type-description"></p>
                                 <input class="order-type-description" type="hidden" name="juice">
+                            </div>
+                            <div id="dessert_order" class="order-elem">
+                                <p class="order-type-name">Десерт</p>
+                                <p class="order-type-description"></p>
+                                <input class="order-type-description" type="hidden" name="dessert">
                             </div>
                             <div id="order_price" class="order-elem">
                                 <p class="order-type-name">Стоимость заказа</p>
