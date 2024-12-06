@@ -147,6 +147,12 @@ legend {
     margin-bottom: 10px;
     padding-left: 0;
 }
+.order-elem {
+    display: none;
+}
+.order-type-name {
+    font-weight: bold;
+}
 
 
  @media (min-width: 1px) and (max-width:799px){
