@@ -1,89 +1,116 @@
 import menu from "./menu-data.js";
 
-// Sort menu items by name
-const sortedMenu = menu.sort((a, b) => (a.name > b.name ? 1 : -1));
+// Сортировка меню по имени
+const sortedMenu = menu.sort((a, b) => a.name.localeCompare(b.name));
 
-// Create and append dish elements
-for (let i = 0; i < sortedMenu.length; i++) {
-  let dishElem = document.createElement("div");
-  dishElem.classList.add("food-elem");
-  dishElem.dataset.keyword = sortedMenu[i].keyword;
-
-  // Create image
-  let img = document.createElement("img");
-  img.src = sortedMenu[i].img;
-  img.alt = sortedMenu[i].category;
-  dishElem.appendChild(img);
-
-  // Create price paragraph
-  let price = document.createElement("p");
-  price.classList.add("price");
-  price.innerHTML = `${sortedMenu[i].price}&#8381`;
-  dishElem.appendChild(price);
-
-  // Create name paragraph
-  let name = document.createElement("p");
-  name.classList.add("name");
-  name.innerHTML = sortedMenu[i].name;
-  dishElem.appendChild(name);
-
-  // Create weight span
-  let weight = document.createElement("span");
-  weight.classList.add("weight");
-  weight.innerHTML = sortedMenu[i].weight;
-  dishElem.appendChild(weight);
-
-  // Create "Add" button
-  let button = document.createElement("button");
-  button.classList.add("add_dish");
-  button.innerHTML = "Добавить";
-  dishElem.appendChild(button);
-
-  // Append dish element to parent category element
-  let parent = document.getElementById(`${sortedMenu[i].category}`);
-  if (parent) {
-    parent.appendChild(dishElem);
-  }
+// Рендер всех категорий при загрузке страницы
+function renderAllCategories(menu) {
+  const categories = [...new Set(menu.map((item) => item.category))];
+  categories.forEach((categoryId) => {
+    const filteredMenu = menu.filter((item) => item.category === categoryId);
+    renderDishes(filteredMenu, categoryId);
+  });
 }
 
-// Basket object to track selected items
+// Рендер блюд конкретной категории
+function renderDishes(filteredMenu, categoryId) {
+  const parent = document.getElementById(categoryId);
+  if (!parent) return;
+
+  parent.innerHTML = filteredMenu
+    .map(
+      (dish) => `
+      <div class="food-elem" data-keyword="${dish.keyword}">
+        <img src="${dish.img}" alt="${dish.name}" />
+        <p>${dish.name}</p>
+        <p>${dish.price}₽</p>
+        <button class="add_dish">Добавить</button>
+      </div>
+    `
+    )
+    .join("");
+}
+
+// Корзина для отслеживания выбранных блюд
 const orderPrice = document.getElementById("order_price");
 
-let busket = {
-  soup: { name: "", price: 0 },
-  main_dish: { name: "", price: 0 },
-  juice: { name: "", price: 0 },
-  price: function () {
-    return this.soup.price + this.main_dish.price + this.juice.price;
-  },
-};
+let basket = {
+    soup: { name: "", price: 0 },
+    main_dish: { name: "", price: 0 },
+    salad_starter: { name: "", price: 0 },
+    juice: { name: "", price: 0 },
+    dessert: { name: "", price: 0 }, // Добавлено поле для десертов
+    price() {
+      return (
+        this.soup.price +
+        this.main_dish.price +
+        this.salad_starter.price +
+        this.juice.price +
+        this.dessert.price // Учитываем цену десертов
+      );
+    },
+  };
 
-// Add event listeners to buttons
+// Обновление отображения заказа
+function updateOrderDisplay(dish) {
+  const orderElem = document.getElementById(`${dish.category}_order`);
+  if (orderElem) {
+    orderElem.querySelector(".order-type-description").innerHTML = 
+      `${basket[dish.category].name} ${basket[dish.category].price}₽`;
+    orderElem.querySelector("input").value = dish.keyword;
+    orderElem.style.display = "block";
+  }
+
+  orderPrice.style.display = "block";
+  orderPrice.querySelector(".order-type-description").innerHTML =
+    `${basket.price()}₽`;
+  orderPrice.querySelector("input").value = basket.price();
+}
+
+// Добавление события для кнопок "Добавить"
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("add_dish")) {
-    const keyword = event.target.parentElement.dataset.keyword;
+    const keyword = event.target.closest(".food-elem").dataset.keyword;
     const dish = sortedMenu.find((el) => el.keyword === keyword);
     if (dish) {
-      busket[dish.category] = { name: dish.name, price: dish.price };
-
-      const orderElem = document.getElementById(`${dish.category}_order`);
-      if (orderElem) {
-        orderElem.getElementsByClassName("order-type-description")[0].innerHTML =
-          `${busket[dish.category].name} ${busket[dish.category].price}&#8381;`;
-
-        orderElem.getElementsByClassName("order-type-description")[1].value =
-          keyword;
-
-        orderElem.style.display = "block";
-      }
-
-      orderPrice.style.display = "block";
-      orderPrice.getElementsByClassName(
-        "order-type-description"
-      )[0].innerHTML = `${busket.price()}&#8381;`;
-      orderPrice.getElementsByClassName(
-        "order-type-description"
-      )[1].value = busket.price();
+      basket[dish.category] = { name: dish.name, price: dish.price };
+      updateOrderDisplay(dish);
     }
   }
 });
+
+// Фильтрация блюд по категориям и типам
+function filterDishes(categoryId, kind = null) {
+  const filteredMenu = sortedMenu.filter(
+    (item) => item.category === categoryId && (!kind || item.kind === kind)
+  );
+  renderDishes(filteredMenu, categoryId);
+}
+
+document.querySelectorAll(".filter_button").forEach((filterButton) => {
+  filterButton.addEventListener("click", () => {
+    const isActive = filterButton.dataset.active === "true";
+    const kind = filterButton.dataset.kind;
+    const categoryContainer =
+      filterButton.closest(".category-container").querySelector(".dish");
+    const categoryId = categoryContainer.id;
+
+    filterDishes(categoryId, isActive ? null : kind);
+
+    filterButton.dataset.active = !isActive;
+    filterButton.classList.toggle("active_button", !isActive);
+
+    // Сброс других кнопок фильтра
+    filterButton.parentNode.querySelectorAll(".filter_button").forEach((btn) => {
+      if (btn !== filterButton) {
+        btn.dataset.active = false;
+        btn.classList.remove("active_button");
+      }
+    });
+  });
+});
+
+// Отображение всех блюд при загрузке страницы
+renderAllCategories(sortedMenu);
+
+
