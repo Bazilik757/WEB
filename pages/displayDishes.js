@@ -34,22 +34,22 @@ function renderDishes(filteredMenu, categoryId) {
 // Корзина для отслеживания выбранных блюд
 const orderPrice = document.getElementById("order_price");
 
-let basket = {
-    soup: { name: "", price: 0 },
-    main_dish: { name: "", price: 0 },
-    salad_starter: { name: "", price: 0 },
-    juice: { name: "", price: 0 },
-    dessert: { name: "", price: 0 }, // Добавлено поле для десертов
-    price() {
-      return (
-        this.soup.price +
-        this.main_dish.price +
-        this.salad_starter.price +
-        this.juice.price +
-        this.dessert.price // Учитываем цену десертов
-      );
-    },
-  };
+export let basket = {
+  soup: { name: "", price: 0 },
+  main_dish: { name: "", price: 0 },
+  salad_starter: { name: "", price: 0 },
+  juice: { name: "", price: 0 },
+  dessert: { name: "", price: 0 },
+  price() {
+    return (
+      this.soup.price +
+      this.main_dish.price +
+      this.salad_starter.price +
+      this.juice.price +
+      this.dessert.price
+    );
+  },
+};
 
 // Обновление отображения заказа
 function updateOrderDisplay(dish) {
@@ -112,5 +112,4 @@ document.querySelectorAll(".filter_button").forEach((filterButton) => {
 
 // Отображение всех блюд при загрузке страницы
 renderAllCategories(sortedMenu);
-
 
