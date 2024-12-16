@@ -120,7 +120,7 @@
                 <!-- Кнопки фильтров с нужными атрибутами -->
                 <button class="filter_button" data-kind="fish" data-active="false">Рыбный</button>
                 <button class="filter_button" data-kind="meat" data-active="false">Мясной</button>
-                <button class="filter_button" data-kind="vegetarian" data-active="false">Вегетарианский</button>
+                <button class="filter_button" data-kind="veg" data-active="false">Вегетарианский</button>
             </div>
             <!-- Контейнер для отображения блюд категории "супы" -->
             <div id="soup" class="dish category"></div>
@@ -131,9 +131,9 @@
             <div class="filters">
                 <button class="filter_button" data-kind="fish" data-active="false">Рыбное</button>
                 <button class="filter_button" data-kind="meat" data-active="false">Мясное</button>
-                <button class="filter_button" data-kind="vegetarian" data-active="false">Вегетарианское</button>
+                <button class="filter_button" data-kind="veg" data-active="false">Вегетарианское</button>
             </div>
-            <div id="main_dish" class="dish category"></div>
+            <div id="main-course" class="dish category"></div>
         </section>
 
 
@@ -142,9 +142,9 @@
             <div class="filters">
                 <button class="filter_button" data-kind="fish" data-active="false">Рыбное</button>
                 <button class="filter_button" data-kind="meat" data-active="false">Мясное</button>
-                <button class="filter_button" data-kind="vegetarian" data-active="false">Вегетарианское</button>
+                <button class="filter_button" data-kind="veg" data-active="false">Вегетарианское</button>
             </div>
-            <div id="salad_starter" class="dish category"></div>
+            <div id="salad" class="dish category"></div>
         </section>
 
         <section class="category-container">
@@ -154,7 +154,7 @@
                 <button class="filter_button" data-kind="cold" data-active="false">Холодное</button>
                 <button class="filter_button" data-kind="hot" data-active="false">Горячее</button>
             </div>
-            <div id="juice" class="dish category"></div>
+            <div id="drink" class="dish category"></div>
         </section>
 
         <section class="category-container">
@@ -162,8 +162,8 @@
             <div class="filters">
                 <!-- Кнопки фильтров с нужными атрибутами -->
                 <button class="filter_button" data-kind="small" data-active="false">Маленькая порция</button>
-                <button class="filter_button" data-kind="average" data-active="false">Средняя порция</button>
-                <button class="filter_button" data-kind="big" data-active="false">Большая порция</button>
+                <button class="filter_button" data-kind="medium" data-active="false">Средняя порция</button>
+                <button class="filter_button" data-kind="large" data-active="false">Большая порция</button>
             </div>
             <div id="dessert" class="dish category"></div>
         </section>
@@ -254,5 +254,6 @@
     </div>
     <script type="module" src="notifications.js"></script>
     <script type="module" src="displayDishes.js"></script>
+    <script type="module" src="load_dishes.js"></script>
 </body>
 </html>
