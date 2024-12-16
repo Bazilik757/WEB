@@ -185,18 +185,82 @@ legend {
   
   /* Активное состояние кнопки (когда фильтр применяется) */
   .filter_button.active_button {
-    background-color: #007bff; /* Синий фон */
+    background-color: #f44336; /* Синий фон */
     color: white; /* Белый текст */
   }
   
   /* При наведении на активную кнопку (активный фильтр) */
   .filter_button.active_button:hover {
-    background-color: #0056b3; /* Темно-синий фон */
+    background-color: #d32f2f; /* Темно-синий фон */
   }
 
+  .options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 3rem;
+    grid-row-gap: 3rem;
+    padding: 3rem 0;
+    gap: 20px;
+    justify-items: center;
+    font-size: 1.1rem; /* Уменьшенный размер текста */
+  }
+  
+  .lunch_options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .lunch_dish {
+    text-align: center;
+  }
+  .desert-option {
+    margin-top: 20px; /* Отступ для десерта */
+  }
+  
+  .desert-item {
+    text-align: center;
+  }
+  
+  .lunch_dish_text {
+    font-size: 12px; /* Размер текста для десерта */
+    color: gray; /* Цвет текста для дополнительного пояснения */
+  }
+  .lunch_dish img {
+    width: 70px; /* Размер иконок */
+    height: auto;
+    transition: transform 0.3s ease; /* Плавный переход */
+  }
 
-
-
+  .lunch_dish img:hover {
+    transform: translateY(-10px) scale(1.2); /* Подъем вверх и увеличение */
+  }
+  .options_title {
+    text-align: center;
+  }
+  #notific {
+    position: fixed;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    border: black 1px solid;
+    padding: 5rem 10rem;
+    background-color: white;
+  }
+  
+  #notific_button {
+    background-color: white;
+    border: black 1 px solid;
+    margin-top: 3rem;
+    padding: 0.7rem 3rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 2.5rem;
+  }
 
 
  @media (min-width: 1px) and (max-width:799px){
