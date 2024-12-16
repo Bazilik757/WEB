@@ -1,4 +1,6 @@
-import menu from "./menu-data.js";
+import loadDishes from "./load_dishes.js";
+
+let menu = await loadDishes();
 
 // Сортировка меню по имени
 const sortedMenu = menu.sort((a, b) => a.name.localeCompare(b.name));
@@ -21,7 +23,7 @@ function renderDishes(filteredMenu, categoryId) {
     .map(
       (dish) => `
       <div class="food-elem" data-keyword="${dish.keyword}">
-        <img src="${dish.img}" alt="${dish.name}" />
+        <img src="${dish.image}" alt="${dish.name}" />
         <p>${dish.name}</p>
         <p>${dish.price}₽</p>
         <button class="add_dish">Добавить</button>
