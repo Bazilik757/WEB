@@ -1,0 +1,6 @@
+{
+    "name": "proj1",
+    "version": "1.0.0",
+    "main": "menu_data.js",
+    "type": "module"
+  }
