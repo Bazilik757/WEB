@@ -22,29 +22,29 @@ function checkOrder() {
   // Получаем текущий набор блюд из корзины
   const selectedDishes = {
     soup: basket.soup.name !== "",
-    main_dish: basket.main_dish.name !== "",
-    salad_starter: basket.salad_starter.name !== "",
-    juice: basket.juice.name !== "",
+    "main-course": basket["main-course"].name !== "",
+    salad: basket.salad.name !== "",
+    drink: basket.drink.name !== "",
     dessert: basket.dessert.name !== ""
   };
 
  // Логика проверки на соответствие одному из вариантов ланча
- if (!selectedDishes.soup && !selectedDishes.main_dish && !selectedDishes.salad_starter && !selectedDishes.juice && !selectedDishes.dessert) {
+ if (!selectedDishes.soup && !selectedDishes.main-course && !selectedDishes.salad && !selectedDishes.drink && !selectedDishes.dessert) {
     return "Ничего не выбрано. Выберите блюда для заказа";
   }
-  if (selectedDishes.dessert && !selectedDishes.soup && !selectedDishes.main_dish && !selectedDishes.salad_starter && !selectedDishes.juice) {
+  if (selectedDishes.dessert && !selectedDishes.soup && !selectedDishes.main-course && !selectedDishes.salad && !selectedDishes.drink) {
     return "Только десерт заказать нельзя. Выберите другие блюда.";
   }
-  if (!selectedDishes.juice) {
+  if (!selectedDishes.drink) {
     return "Выберите напиток";
   }
-  if (selectedDishes.soup && !selectedDishes.main_dish && !selectedDishes.salad_starter) {
+  if (selectedDishes.soup && !selectedDishes.main-course && !selectedDishes.salad) {
     return "Выберите главное блюдо/салат/стартер";
   }
-  if (selectedDishes.salad_starter && (!selectedDishes.soup || !selectedDishes.main_dish)) {
+  if (selectedDishes.salad && (!selectedDishes.soup || !selectedDishes.main-course)) {
     return "Выберите суп или главное блюдо";
   }
-  if (!selectedDishes.main_dish) {
+  if (!selectedDishes.main-course) {
     return "Выберите главное блюдо";
   }
 
