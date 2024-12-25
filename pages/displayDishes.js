@@ -37,11 +37,11 @@ function renderDishes(filteredMenu, categoryId) {
 const orderPrice = document.getElementById("order_price");
 
 export let basket = {
-  soup: { name: "", price: 0, image: "" },
-  "main-course": { name: "", price: 0, image: "" },
-  salad: { name: "", price: 0, image: "" },
-  drink: { name: "", price: 0, image: "" },
-  dessert: { name: "", price: 0, image: "" },
+  soup: { name: "", price: 0 },
+  "main-course": { name: "", price: 0 },
+  salad: { name: "", price: 0 },
+  drink: { name: "", price: 0 },
+  dessert: { name: "", price: 0 },
   price() {
     return (
       this.soup.price +
@@ -53,39 +53,12 @@ export let basket = {
   },
 };
 
-
-// Функция для сохранения текущего состояния корзины в localStorage
-function saveBasketToLocalStorage() {
-  const basketData = {
-      soup: basket.soup.name ? basket.soup : null,
-      "main-course": basket["main-course"].name ? basket["main-course"] : null,
-      salad: basket.salad.name ? basket.salad : null,
-      drink: basket.drink.name ? basket.drink : null,
-      dessert: basket.dessert.name ? basket.dessert : null,
-  };
-  localStorage.setItem("basket", JSON.stringify(basketData));
-}
-// Функция для загрузки корзины из localStorage
-function loadBasketFromLocalStorage() {
-  const savedBasket = JSON.parse(localStorage.getItem("basket"));
-  if (savedBasket) {
-    Object.keys(savedBasket).forEach((key) => {
-      if (savedBasket[key]) {
-        basket[key] = savedBasket[key]; // Восстанавливаем все данные, включая image
-        updateOrderDisplay({ category: key, ...savedBasket[key] });
-      }
-    });
-  }
-}
-
-
 // Обновление отображения заказа
 function updateOrderDisplay(dish) {
   const orderElem = document.getElementById(`${dish.category}_order`);
   if (orderElem) {
     orderElem.querySelector(".order-type-description").innerHTML = 
-      `<img src="${basket[dish.category].image}" alt="${basket[dish.category].name}" style="width:50px; height:auto;"> 
-       ${basket[dish.category].name} ${basket[dish.category].price}₽`;
+      `${basket[dish.category].name} ${basket[dish.category].price}₽`;
     orderElem.querySelector("input").value = dish.keyword;
     orderElem.style.display = "block";
   }
@@ -96,25 +69,17 @@ function updateOrderDisplay(dish) {
   orderPrice.querySelector("input").value = basket.price();
 }
 
-
+// Добавление события для кнопок "Добавить"
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("add_dish")) {
     const keyword = event.target.closest(".food-elem").dataset.keyword;
     const dish = sortedMenu.find((el) => el.keyword === keyword);
     if (dish) {
-      // Сохраняем название, цену и путь к изображению
-      basket[dish.category] = { 
-        name: dish.name, 
-        price: dish.price, 
-        image: dish.image 
-      };
-      
+      basket[dish.category] = { name: dish.name, price: dish.price };
       updateOrderDisplay(dish);
-      saveBasketToLocalStorage(); // Сохраняем изменения в localStorage
     }
   }
 });
-
 
 // Фильтрация блюд по категориям и типам
 function filterDishes(categoryId, kind = null) {
@@ -146,11 +111,6 @@ document.querySelectorAll(".filter_button").forEach((filterButton) => {
     });
   });
 });
-
-// Отображение всех блюд при загрузке страницы
-renderAllCategories(sortedMenu);
-// Загрузка состояния корзины при старте страницы
-loadBasketFromLocalStorage();
 
 // Отображение всех блюд при загрузке страницы
 renderAllCategories(sortedMenu);
