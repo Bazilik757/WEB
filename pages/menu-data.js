@@ -113,6 +113,7 @@ const dishes = [
         name: "Цезарь с цыпленком",
         keyword: "caesar",
         weight: "220г",
+        category: "salad_starter",
         category: "salad",
         kind: "meat"
       },
@@ -270,5 +271,6 @@ const dishes = [
         kind: "average"
       }
 ];
+
 
 export default dishes;
