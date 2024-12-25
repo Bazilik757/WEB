@@ -29,24 +29,25 @@ function checkOrder() {
   };
 
  // Логика проверки на соответствие одному из вариантов ланча
- if (!selectedDishes.soup && !selectedDishes.main-course && !selectedDishes.salad && !selectedDishes.drink && !selectedDishes.dessert) {
+ if (!selectedDishes.soup && !selectedDishes["main-course"] && !selectedDishes.salad && !selectedDishes.drink && !selectedDishes.dessert) {
     return "Ничего не выбрано. Выберите блюда для заказа";
   }
-  if (selectedDishes.dessert && !selectedDishes.soup && !selectedDishes.main-course && !selectedDishes.salad && !selectedDishes.drink) {
+  if (selectedDishes.dessert && !selectedDishes.soup && !selectedDishes["main-course"] && !selectedDishes.salad && !selectedDishes.drink) {
     return "Только десерт заказать нельзя. Выберите другие блюда.";
   }
   if (!selectedDishes.drink) {
     return "Выберите напиток";
   }
-  if (selectedDishes.soup && !selectedDishes.main-course && !selectedDishes.salad) {
+  if (selectedDishes.soup && !selectedDishes["main-course"] && !selectedDishes.salad) {
     return "Выберите главное блюдо/салат/стартер";
   }
-  if (selectedDishes.salad && (!selectedDishes.soup || !selectedDishes.main-course)) {
+  if (selectedDishes.salad && !selectedDishes.soup && !selectedDishes["main-course"]) {
     return "Выберите суп или главное блюдо";
   }
-  if (!selectedDishes.main-course) {
+  if (!selectedDishes["main-course"] && !(selectedDishes.soup && selectedDishes.salad && selectedDishes.drink)) {
     return "Выберите главное блюдо";
   }
+  
 
   // Если все условия соблюдены, возвращаем null
   return null;
@@ -63,5 +64,3 @@ document.querySelector("form").addEventListener("submit", (event) => {
     showNotification(errorMessage); // Показываем уведомление
   }
 });
-
-  
