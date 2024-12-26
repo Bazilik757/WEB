@@ -37,11 +37,11 @@ function renderDishes(filteredMenu, categoryId) {
 const orderPrice = document.getElementById("order_price");
 
 export let basket = {
-  soup: { name: "", price: 0 },
-  "main-course": { name: "", price: 0 },
-  salad: { name: "", price: 0 },
-  drink: { name: "", price: 0 },
-  dessert: { name: "", price: 0 },
+  soup: { name: "", price: 0, keyword: "" },
+  "main-course": { name: "", price: 0, keyword: "" },
+  salad: { name: "", price: 0, keyword: "" },
+  drink: { name: "", price: 0, keyword: "" },
+  dessert: { name: "", price: 0, keyword: "" },
   price() {
     return (
       this.soup.price +
@@ -53,11 +53,34 @@ export let basket = {
   },
 };
 
-// Обновление отображения заказа
+// Функции для работы с localStorage
+function saveBasketToLocalStorage() {
+  const basketData = Object.keys(basket).reduce((acc, category) => {
+    if (category !== "price" && basket[category].name) {
+      acc[category] = basket[category].keyword; // Сохраняем только keyword
+    }
+    return acc;
+  }, {});
+  localStorage.setItem("basket", JSON.stringify(basketData));
+}
+
+function loadBasketFromLocalStorage() {
+  const savedBasket = JSON.parse(localStorage.getItem("basket")) || {};
+  Object.keys(savedBasket).forEach((category) => {
+    const keyword = savedBasket[category];
+    const dish = sortedMenu.find((el) => el.keyword === keyword);
+    if (dish) {
+      basket[category] = { name: dish.name, price: dish.price, keyword };
+      updateOrderDisplay(dish);
+    }
+  });
+}
+
+// Обновление отображения заказа с сохранением в localStorage
 function updateOrderDisplay(dish) {
   const orderElem = document.getElementById(`${dish.category}_order`);
   if (orderElem) {
-    orderElem.querySelector(".order-type-description").innerHTML = 
+    orderElem.querySelector(".order-type-description").innerHTML =
       `${basket[dish.category].name} ${basket[dish.category].price}₽`;
     orderElem.querySelector("input").value = dish.keyword;
     orderElem.style.display = "block";
@@ -67,7 +90,15 @@ function updateOrderDisplay(dish) {
   orderPrice.querySelector(".order-type-description").innerHTML =
     `${basket.price()}₽`;
   orderPrice.querySelector("input").value = basket.price();
+
+  // Сохраняем изменения в localStorage
+  saveBasketToLocalStorage();
 }
+
+// Загрузка сохраненных данных при загрузке страницы
+document.addEventListener("DOMContentLoaded", () => {
+  loadBasketFromLocalStorage();
+});
 
 // Добавление события для кнопок "Добавить"
 document.addEventListener("click", (event) => {
@@ -75,7 +106,7 @@ document.addEventListener("click", (event) => {
     const keyword = event.target.closest(".food-elem").dataset.keyword;
     const dish = sortedMenu.find((el) => el.keyword === keyword);
     if (dish) {
-      basket[dish.category] = { name: dish.name, price: dish.price };
+      basket[dish.category] = { name: dish.name, price: dish.price, keyword };
       updateOrderDisplay(dish);
     }
   }
