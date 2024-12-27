@@ -23,7 +23,6 @@ th, td {
 }
 
 
-
 /* Контейнер для действий */
 .action {
   display: flex;
@@ -118,7 +117,6 @@ th, td {
   color: white;
   background-color:rgb(51, 174, 133);
 }
-
 
 
 /* Кнопки внутри .mod_but */
