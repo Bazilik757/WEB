@@ -1,66 +1,46 @@
-import { basket } from "./displayDishes.js";
+import { bin } from "./order.js";
 
-// Функция для показа уведомления
-function showNotification(message) {
-  const notification = document.getElementById("notification");
-  const messageElem = document.getElementById("notification-message");
-  
-  messageElem.textContent = message;
-  
-  notification.classList.remove("hidden");
-}
+const notific = document.getElementById('notific');
+const notific_text = document.getElementById('notific_text');
+const notific_button = document.getElementById('notific_button');
+const butElem = document.getElementById('submit_button');
 
-// Обработчик нажатия на кнопку "Окей"
-document.getElementById("notification-ok").addEventListener("click", () => {
-  const notification = document.getElementById("notification");
-  
-  notification.classList.add("hidden");
-});
-
-// Функция для проверки заказа
-function checkOrder() {
-  // Получаем текущий набор блюд из корзины
-  const selectedDishes = {
-    soup: basket.soup.name !== "",
-    "main-course": basket["main-course"].name !== "",
-    salad: basket.salad.name !== "",
-    drink: basket.drink.name !== "",
-    dessert: basket.dessert.name !== ""
+export const notificFoo = (e) => {
+  const showNotification = (message) => {
+    e.preventDefault();
+    notific_text.innerHTML = message;
+    notific.style.display = 'flex';
+    return false;
   };
 
- // Логика проверки на соответствие одному из вариантов ланча
- if (!selectedDishes.soup && !selectedDishes["main-course"] && !selectedDishes.salad && !selectedDishes.drink && !selectedDishes.dessert) {
-    return "Ничего не выбрано. Выберите блюда для заказа";
-  }
-  if (selectedDishes.dessert && !selectedDishes.soup && !selectedDishes["main-course"] && !selectedDishes.salad && !selectedDishes.drink) {
-    return "Только десерт заказать нельзя. Выберите другие блюда.";
-  }
-  if (!selectedDishes.drink) {
-    return "Выберите напиток";
-  }
-  if (selectedDishes.soup && !selectedDishes["main-course"] && !selectedDishes.salad) {
-    return "Выберите главное блюдо/салат/стартер";
-  }
-  if (selectedDishes.salad && !selectedDishes.soup && !selectedDishes["main-course"]) {
-    return "Выберите суп или главное блюдо";
-  }
-  if (!selectedDishes["main-course"] && !(selectedDishes.soup && selectedDishes.salad && selectedDishes.drink)) {
-    return "Выберите главное блюдо";
-  }
-  
+  const hasDrink = bin["drink"] !== "";
+  const hasSoup = bin["soup"] === "1";
+  const hasMainCourse = bin["main-course"] === "1";
+  const hasSalad = bin["salad"] === "1";
 
-  // Если все условия соблюдены, возвращаем null
-  return null;
-}
-
-
-
-// Обработчик отправки формы
-document.querySelector("form").addEventListener("submit", (event) => {
-  const errorMessage = checkOrder();
-  
-  if (errorMessage) {
-    event.preventDefault(); // Отменяем отправку формы
-    showNotification(errorMessage); // Показываем уведомление
+  if (hasSoup) {
+    if (!hasMainCourse && !hasSalad) {
+      return showNotification('Выберите главное блюдо или салат/стартер');
+    }
+    if (!hasDrink) {
+      return showNotification('Выберите напиток');
+    }
+  } else {
+    if (hasMainCourse || hasSalad) {
+      if (!hasDrink) {
+        return showNotification('Выберите напиток');
+      }
+    } else {
+      if (!hasDrink) {
+        return showNotification('Ничего не выбрано');
+      }
+      return showNotification('Выберите главное блюдо');
+    }
   }
+
+  return true;
+};
+
+notific_button.addEventListener('click', () => {
+  notific.style.display = 'none';
 });
