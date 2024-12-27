@@ -1,0 +1,18 @@
+#order_content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 1.5rem;
+  margin: 4rem 0;
+}
+
+.delete_dish {
+  background-color: #f1eee9;
+  padding: 10px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 0;
+  font-size: 2.5rem;
+  margin-top: 4px;
+}
+
