@@ -1,83 +1,131 @@
-import loadDishes from "./load_dishes.js";
+import { loadDishes, loadServer}  from "./load_dishes.js";
+import { notificFoo } from "./notifications.js";
+export let menu = await loadDishes();
 
-// Загрузка данных из localStorage
-function loadBasketFromLocalStorage() {
-  return JSON.parse(localStorage.getItem("basket")) || {};
+for (let elem of menu) {
+  let dish = localStorage.getItem(elem.category);
+  if (dish == elem.id) {
+    let dishElem = document.createElement("div");
+    dishElem.classList.add('dish_elem');
+    dishElem.dataset.dish = elem.category;
+
+    let img = document.createElement('img');
+    img.src = elem.image;
+    img.alt = elem.category;
+    dishElem.appendChild(img);
+
+    let price = document.createElement('p');
+    price.classList.add('price');
+    price.innerHTML = elem.price + "&#8381";
+    dishElem.appendChild(price);
+
+    let name = document.createElement('p');
+    name.classList.add('name');
+    name.innerHTML = elem.name;
+    dishElem.appendChild(name);
+
+    let weight = document.createElement('p');
+    weight.classList.add('weight');
+    weight.innerHTML = elem.count;
+    dishElem.appendChild(weight);
+
+    let button = document.createElement('button');
+    button.classList.add('delete_dish');
+    button.innerHTML = "Удалить";
+    dishElem.appendChild(button);
+
+    let parent = document.getElementById('order_content');
+    parent.appendChild(dishElem);
+  }
 }
 
-// Удаление блюда из localStorage
-function removeDishFromBasket(category) {
-  const basket = loadBasketFromLocalStorage();
-  delete basket[category];
-  localStorage.setItem("basket", JSON.stringify(basket));
+let price = {
+  "soup": 0,
+  "main-course": 0,
+  "salad": 0,
+  "drink": 0,
+  "dessert": 0,
+  summ: function () {
+    return this["soup"] + this["main-course"] + this["salad"] + this["drink"] +this["dessert"]
+  }
 }
 
-// Рендер списка блюд
-async function renderOrderSummary() {
-  const basket = loadBasketFromLocalStorage();
-  const menu = await loadDishes();
+export let bin = {
+  "soup": '',
+  "main-course": '',  
+  "salad": '',
+  "drink": '',
+  "dessert": ''
+}
+
+const order_price = document.getElementById('order_price');
+const no_order = document.getElementById('no_dishes');
+const orders = document.getElementById('orders');
+const no_order_content = document.getElementById('no_order_content');
+
+for (const elem of document.getElementsByClassName('dish_elem')) {
+  const arr = Array.from(elem.childNodes);
+  const type_of_food = elem.dataset.dish;
+  price[type_of_food] = Number(Array.from(arr[1].textContent).slice(0, -1).join(''));
+  document.getElementById(`no_${type_of_food}`).innerHTML = arr[2].textContent + " " + price[type_of_food] + "&#8381";
+  order_price.innerHTML = price.summ() + "&#8381";
   
-  const orderDishesContainer = document.getElementById("order_dishes");
-  const emptyOrderMessage = document.getElementById("empty_order_message");
+  document.getElementById(`order_${type_of_food}_value`).value = arr[2].textContent;
+  document.getElementById('order_price_value').value = price.summ();
+  bin[type_of_food] = '1';
+  
+};
 
-  // Получаем данные о выбранных блюдах
-  const selectedDishes = Object.keys(basket).map((category) => {
-    const keyword = basket[category];
-    return menu.find((dish) => dish.keyword === keyword);
-  }).filter(Boolean);
-
-  // Если ничего не выбрано, показываем сообщение
-  if (selectedDishes.length === 0) {
-    emptyOrderMessage.style.display = "block";
-    orderDishesContainer.innerHTML = "";
-    return;
-  }
-
-  emptyOrderMessage.style.display = "none";
-
-  // Отображаем блюда
-  orderDishesContainer.innerHTML = selectedDishes.map((dish) => `
-    <div class="food-elem" data-category="${dish.category}">
-      <img src="${dish.image}" alt="${dish.name}" />
-      <p>${dish.name}</p>
-      <p>${dish.price}₽</p>
-      <button class="remove_dish">Удалить</button>
-    </div>
-  `).join("");
-
-  // Добавляем обработчики для кнопок "Удалить"
-  document.querySelectorAll(".remove_dish").forEach((button) => {
-    button.addEventListener("click", (event) => {
-      const category = event.target.closest(".food-elem").dataset.category;
-      removeDishFromBasket(category);
-      renderOrderSummary(); // Перерисовываем список блюд
-    });
-  });
+for (const el of document.getElementsByClassName('delete_dish')){
+  el.addEventListener('click', () => {
+    let dishCategory = el.parentNode.dataset.dish;
+    localStorage.removeItem(dishCategory);
+    el.parentElement.remove();
+    document.getElementById(`no_${dishCategory}`).innerHTML = "Блюдо не выбрано";
+    price[dishCategory] = 0;
+    order_price.innerHTML = price.summ() + "&#8381";
+    bin[dishCategory] = '';
+    
+    if(price.summ() == 0) {
+      no_order.hidden = false;
+      orders.hidden = true;
+      no_order_content.innerHTML = "Ничего не выбрано";
+    }
+   })
 }
 
-// Обработка формы оформления заказа
-document.getElementById("checkout_form").addEventListener("submit", (event) => {
-  event.preventDefault();
+if(price.summ() != 0) {
+  no_order.hidden = true;
+}
 
-  const name = document.getElementById("name").value;
-  const address = document.getElementById("address").value;
-  const phone = document.getElementById("phone").value;
+if(price.summ() == 0) {
+  orders.hidden = true;
+  no_order_content.innerHTML = "Ничего не выбрано";
+}
 
-  if (!name || !address || !phone) {
-    alert("Пожалуйста, заполните все поля формы.");
+const submit_button = document.getElementById('submit_button');
+submit_button.addEventListener('click', async (e) => {
+  e.preventDefault();
+  if(!notificFoo(e)) {
     return;
   }
-
-  // Отправка данных на сервер (заглушка)
-  console.log("Заказ оформлен:", { name, address, phone });
-
-  // Очистка localStorage и обновление страницы
-  localStorage.removeItem("basket");
-  alert("Ваш заказ успешно оформлен!");
-  renderOrderSummary();
-});
-
-// Инициализация страницы
-document.addEventListener("DOMContentLoaded", () => {
-  renderOrderSummary();
-});
+  const form_data = new FormData(document.getElementById('form_data'));
+  const data = {
+    full_name: form_data.get('name'),
+    email: form_data.get('email'),
+    subscribe: form_data.get('information') === 'on',
+    phone: form_data.get('phone'),
+    delivery_address: form_data.get('address'),
+    delivery_type: form_data.get('time'),
+    delivery_time: form_data.get('time_delivery'),
+    comment: form_data.get('comments'),
+    soup_id: localStorage.getItem('soup') == null ? "" : localStorage.getItem('soup'),
+    main_course_id: localStorage.getItem('main-course') == null ? "" : localStorage.getItem('main-course'),
+    salad_id: localStorage.getItem('salad') == null ? "" : localStorage.getItem('salad'),
+    drink_id: localStorage.getItem('drink') == null ? "" : localStorage.getItem('drink'),
+    dessert_id: localStorage.getItem('dessert') == null ? "" : localStorage.getItem('dessert')
+  }
+  const ans = await loadServer(data)
+  console.log(ans);
+  location.reload();
+})
