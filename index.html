@@ -3,79 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@400;700&display=swap" rel="stylesheet">
+    <title>Ponomareva</title>
     <link rel="stylesheet" href="style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
-<body class="main"> 
+<body>
     <header>
-        <h1>Food Construct </h1>
+        <h1>Food Construct</h1>
         <nav>
-            <a href="index.html" class="active">О нас</a>
-            <a href="pages/lanch.html">Собрать ланч</a>
-            <a href="orders">Заказы</a>
+            <a class="active" href="#about">О нас</a>
+            <a href="./pages/lanch.html">Собрать ланч</a>
+            <a href="./pages/order.html">Оформить заказ</a>
+            <a href="./pages/order_history.html">Заказы</a>
             <a href="#contacts">Контакты</a>
         </nav>
     </header>
-   <main>
+    <main>
         <section id="about">
-             <img src="images/food.png" alt="food" >  
-             <h2> О нас</h2>
-            <p>Food Construct- доставка бизнес-ланчей в Москве. Мы привезем вам горячую
-                вкусную еду в любую точку города к назначенному времени.</p>
+            <img src="images/food.png" alt="food">
+            <h2 class="name">О нас</h2>
+            <p id="descripstion">Food Constract - доставка бизнес-ланчей в Москве. Мы привезем вам горячую вкусную еду в любую точку города к назначенному времени. </p>
         </section>
-        <section>
-            <h2>Преимущества Food Construct</h2>
+        <section id="advantages">
+            <h2 class="name">Преимущества</h2>
             <ul>
-                <li>Привозим обед к назначенному времени без опозданий</li>
-                <li>Надежно упаковываем блюда в удобные контейнеры бесплатно</li>
-                <li>Доставляем ланчи весь день с 7:00 до 23:00</li>
+                <li> Привозим обед к назначенному времени без опозданий</li>
+                <li> Надежно упаковываем в удобные контейнеры бесплатно</li>
+                <li> Доставляем ланчи весь день с 7:00 до 23:00</li>
             </ul>
         </section>
-        <section>
-            <h2>Топ-5 популярных блюд</h2>
+        <section id="popular">
+            <h2 class="name">Топ-5 популярных блюд</h2>
             <table>
                 <tr>
                     <th></th>
                     <th>Название</th>
                     <th>Кол-во заказов в неделю</th>
-                    <th>Цена</th>
+                    <th id="price">Цена</th>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>Лазанья</td>
                     <td>185</td>
-                    <td>385₽</td>
+                    <td>385 &#8381</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>Том Ям с креветками</td>
+                    <td>Том Ям с креветками </td>
                     <td>161</td>
-                    <td>365₽</td>
+                    <td>365 &#8381</td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>Норвежский суп</td>
+                    <td>Норвежский суп </td>
                     <td>144</td>
-                    <td>270₽</td>
+                    <td>270 &#8381</td>
                 </tr>
                 <tr>
                     <td>4</td>
                     <td>Жареная картошка с грибами</td>
                     <td>132</td>
-                    <td>150₽</td>
+                    <td>150 &#8381</td>
                 </tr>
                 <tr>
                     <td>5</td>
-                    <td>Котлеты из курицы с картофельным пюре</td>
+                    <td>Котлеты из курицы с картофельным пюре </td>
                     <td>128</td>
-                    <td>225₽</td>
+                    <td>225 &#8381</td>
                 </tr>
             </table>
         </section>
-   </main> 
-   <footer id="contacts">
-    <p>Позвонить нам <a href="tel:+70000000000">+7-000-000-00-00</a> </p>
-   </footer>
+
+    </main>
+    <footer id="contacts">
+        <p>Позвонить нам +7-000-000-00-00</p>
+    </footer>
+
 </body>
 </html>
