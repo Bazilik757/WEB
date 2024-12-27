@@ -1,329 +1,373 @@
-section>div {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin-left: 40px;
-    gap: 10px;
+html {
+  font-size: 50%; /* Устанавливаем базовый размер шрифта (10px, если 1rem = 10px) */
+}
 
+body {
+  font-size: 1.6rem; /* Устанавливаем размер шрифта для текста в body (16px) */
 }
-section>div>div{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    flex:1 1 300px;
-    align-items: center;
-    gap: 15px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 40px;
-    padding-right: 50px;
-    border-radius: 35px;
-    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
-    cursor:pointer;
-    background-color: white;
-    justify-content: space-between; /*Распределяет кнопки равномерно */
-    
-}
-h2{
-    margin-left: 40px;
-}
-section>div>div>p{
-    line-height: 1;
-}
-section>div>div:hover{
-    border: 2px solid tomato;
-}
-section>div>div>button:hover{
-    background-color: lightgray;
-}
-section>div>div>img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    height: auto;
-    border-radius: 35px;
-}
-.price{
-    font-size: 20px;
-    padding: 0;
-    margin:0
-}
-.name{
-    font-size:20px;
-    padding: 0;
-    margin: 0;
-}
-.weight{
-    color:grey;
-    padding: 0;
-    margin: 10;
-}
-section>div>div>button{
-    background-color: #f1eee9;
-    border-color: #f1eee9;
-    margin-top: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
-    border-radius: 10px;
-    cursor: pointer;
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
 }
 
 
-#order {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
+.active {
+  color: tomato;
 }
-form {
-    width: 80%;
-    max-width: 800px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
+
+body{
+  font-size: 2.5rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
+header {
+  margin-top: 40px;
+  padding: 0 50px;
+}
+
+nav{
+  font-size: 3rem;
+  margin-top: 8px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+nav a {
+  margin-right: 15px;
+}
+
+nav a:last-child {
+  margin-right: 0;
+}
+
+a{
+  text-decoration: none;
+  color: black ;
+}
+
+a:hover {
+  color:tomato;
+}
+
+main {
+  padding: 0 50px;
+}
+
+.dish {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 1.5rem;
+  margin: 4rem 0;
+}
+
+.dish_elem {
+  display: flex;
+  padding: 30px 40px;
+  flex-direction: column;
+  border-radius: 35px;
+  cursor: pointer;
+  filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+  background-color: white;
+}
+
+.dish_elem:hover {
+  border: 2px solid tomato;
+}
+
+.dish_elem:hover button {
+  background-color: lightgray;
+}
+
+
+img {
+  width: 100%;
+  border-radius: 35px;
+}
+
+.price {
+  font-size: 3rem;
+  margin-top: 15px;
+}
+
+.name {
+  font-size: 3rem;
+  margin: 0 0 15px 0;
+}
+
+.weight {
+  color: grey;
+  font-size: 2rem;
+  margin-top: auto;
+}
+
+.add_dish {
+  background-color: #f1eee9;
+  padding: 10px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 0;
+  font-size: 2.5rem;
+  margin-top: 4px;
+}
+
+
+
+footer {
+  background-color: black;
+  color: white;
+  padding: 30px 50px;
+  margin-top: auto;
+}
+
+
+
+
+.create_order {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0 5rem 0;
+}
+
+.block_create_order {
+  display: flex;
+  justify-content:space-between;
+  font-size: 2.3rem;
+  margin-top: 4rem;
+  width: 70%;
+}
+
+.order_and_data {
+  font-size: 2.7rem;
+  margin-bottom: 2rem;
+}
+
+.info {
+  width: 45%;
+  height: auto;
+}
+
 label {
-    font-size: 14px;
-    margin-bottom: 10px;
+  display: block;
+  margin-top: 2rem;
 }
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="time"],
-textarea,
-select {
-    width: 100%;
-    height: 35px;
-    font-size: 14px;
-    padding: 8px;
-    display: block;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+
+label p {
+  margin-bottom: 1rem;
+}
+
+input, select {
+  font-size: 2.1rem;
+  width: 75%;
+  height: 5rem;
+}
+
+.comments {
+  margin-top: 5rem;
 }
 
 textarea {
-    height: 70px;
-}
-.button-containers {
-    display: flex;
-    justify-content: center; 
-    gap: 10px; 
+  font-size: 2.1rem;
+  width: 75%;
+  height: 12rem;
 }
 
-button {
-    padding: 10px 20px; 
-    font-size: 16px; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer;
-    transition: background-color 0.3s ease; 
+.checkbox_radio {
+  display: flex;
+  align-items: center;
+  font-size: 2.2rem;
 }
 
-button[type="reset"] {
-    background-color: #f44336; 
-    color: white; 
+.checkbox_radio input{
+  margin-right: 1rem;
+  width: 5%;
+  height: 2rem;
 }
 
-button[type="reset"]:hover {
-    background-color: #d32f2f; 
+.checkbox_radio p {
+  margin-bottom: 0;
 }
 
-button[type="submit"] {
-    background-color: #4CAF50; 
-    color: white; 
+em {
+  font-size: 2.1rem;
+  font-style: italic;
 }
 
-button[type="submit"]:hover {
-    background-color: #388E3C; 
+form_button {
+  border: 2px solid #4CAF50; /* Зеленая рамка */
+  border-radius: 10px; /* Скругленные углы */
+  background-color: #f9f9f9; /* Светлый фон */
+  font-size: 2.2rem;
+  text-align: center;
+  padding: 1rem 3rem;
+  transition: all 0.3s ease; /* Плавный переход */
 }
 
-legend {
-    font-weight: bold;
-    margin-bottom: 10px;
-    padding-left: 0;
+form_button:hover {
+  background-color: #4CAF50; /* Зеленый фон при наведении */
+  color: white; /* Белый текст при наведении */
 }
-.order-elem {
-    display: none;
+
+.order_buttons {
+  display: flex;
+  width: 80%; /* Увеличена ширина */
+  justify-content: space-evenly; /* Равномерное распределение кнопок */
+  margin-top: 2.5rem;
 }
-.order-type-name {
-    font-weight: bold;
-}
-.category {
-    margin-bottom: 20px;
-  }
-  .filters {
-    margin-top: 10px;
-  }
-  .filter-button {
-    margin-right: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  .filter-button:hover {
-    background-color: #f0f0f0;
-  }
-  /* Базовый стиль кнопок */
+
 .filter_button {
-    background-color: #f0f0f0; /* Светло-серый фон */
-    color: #333; /* Темный текст */
-    border: 1px solid #ccc; /* Граница */
-    border-radius: 5px; /* Скругленные углы */
-    padding: 10px 15px; /* Внутренние отступы */
-    cursor: pointer; /* Указатель мыши при наведении */
-    transition: background-color 0.3s, color 0.3s; /* Плавный переход цвета */
-  }
-  
-  /* Цвет кнопки при наведении курсора */
-  .filter_button:hover {
-    background-color: #e0e0e0; /* Темнее основной фон */
-  }
-  
-  /* Активное состояние кнопки (когда фильтр применяется) */
-  .filter_button.active_button {
-    background-color: #f44336; /* Синий фон */
-    color: white; /* Белый текст */
-  }
-  
-  /* При наведении на активную кнопку (активный фильтр) */
-  .filter_button.active_button:hover {
-    background-color: #d32f2f; /* Темно-синий фон */
-  }
-
-  .options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 3rem;
-    grid-row-gap: 3rem;
-    padding: 3rem 0;
-    gap: 20px;
-    justify-items: center;
-    font-size: 1.1rem; /* Уменьшенный размер текста */
-  }
-  
-  .lunch_options {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .lunch_dish {
-    text-align: center;
-  }
-  .desert-option {
-    margin-top: 20px; /* Отступ для десерта */
-  }
-  
-  .desert-item {
-    text-align: center;
-  }
-  
-  .lunch_dish_text {
-    font-size: 12px; /* Размер текста для десерта */
-    color: gray; /* Цвет текста для дополнительного пояснения */
-  }
-  .lunch_dish img {
-    width: 70px; /* Размер иконок */
-    height: auto;
-    transition: transform 0.3s ease; /* Плавный переход */
-  }
-
-  .lunch_dish img:hover {
-    transform: translateY(-10px) scale(1.2); /* Подъем вверх и увеличение */
-  }
-  .options_title {
-    text-align: center;
-  }
-
-
-
-  /* CSS */
-.hidden {
-  display: none;
+  padding: 1.2rem 2.5rem;
+  border-radius: 20px; /* Более округлые углы */
+  cursor: pointer;
+  border: none;
+  font-size: 2.6rem;
+  margin-top: 0.5rem;
+  background-color: #e7f5e7; /* Светло-зеленый фон */
+  color: #28a745; /* Темно-зеленый текст */
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.1); /* Тень */
 }
 
-#notification {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #f8f9fa; /* Светло-серый фон */
-  border-radius: 8px; /* Закругленные углы */
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Мягкая тень */
-  border: 2px solid #000;
-  padding: 20px;
-  width: 300px; /* Фиксированная ширина для консистентности */
-  z-index: 1000;
+.filter_button:hover {
+  background-color: #28a745; /* Зеленый фон при наведении */
+  color: white; /* Белый текст при наведении */
 }
 
-.notification-content {
+.active_button {
+  padding: 1.2rem 2.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+  font-size: 2.6rem;
+  margin-top: 0.5rem;
+  background-color: #c8f7c8; /* Светло-зеленый фон активной кнопки */
+  color: #28a745;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(200px, auto)); /* Более гибкая сетка */
+  grid-column-gap: 4rem;
+  grid-row-gap: 3rem;
+  padding: 6rem; /* Увеличен отступ сверху и снизу */
+}
+
+
+
+
+.options_title {
   text-align: center;
 }
 
-#notification-message {
-  font-size: 16px; /* Увеличенный шрифт для читаемости */
-  color: #343a40; /* Темно-серый текст */
+.lunch_options {
+  display: flex;
+  justify-content: space-evenly;
 }
 
-#notification-ok {
-  margin-top: 15px;
-  padding: 10px;
-  background-color: #28a745; /* Зеленый цвет кнопки */
-  color: white;
-  border: none;
-  border-radius: 5px; /* Закругленные углы кнопки */
+.lunch_dish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lunch_dish img {
+  width: 10rem;
+  border-radius: 0;
+}
+
+.lunch_dish img:hover {
+  transform: translateY(-0.9rem) scale(1.2);
+}
+
+.lunch_dish_text {
+  font-size: 1.8rem;
+}
+
+
+
+
+
+
+
+#notific {
+  position: fixed;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  border: black 1px solid;
+  padding: 5rem 10rem;
+  background-color: white;
+}
+
+#notific_button {
+  background-color: white;
+  border: black 1 px solid;
+  margin-top: 3rem;
+  padding: 0.7rem 3rem;
+  border-radius: 10px;
   cursor: pointer;
+  font-size: 2.5rem;
 }
 
-#notification-ok:hover {
-  background-color: #218838; /* Темнее зеленый при наведении */
+#make_order {
+  position:sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(186, 184, 184, 0.6);
+  padding: 1rem 4rem;
+  align-items: center;
+  display: none;
 }
-.order-elem img {
-  display: none; /* Полностью скрывает изображения */
+
+#make_order_button {
+  background-color:rgba(203, 216, 217, 0.4);
+  padding: 1rem 3rem;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 0;
+  font-size: 2.5rem;
 }
 
 
 
- @media (min-width: 1px) and (max-width:799px){
-    h1 {
-        text-align: center;                  
-    }
 
-    section>div>div{
-        display: flex;                      
-        flex-direction: column;              
-        align-items: center; 
-    }
-    
 
-    nav > a {
-        font-size: 20px;                    
-    }
-    
-    section > h2 {
-        text-align: center;                 
-    }
-    
 
-    section > div {
-        display: grid;                       
-        grid-template-columns: 1fr;                
-    }
-} 
 
-@media (min-width: 800px){
-    section>div>div{
-        display: flex;                       
-        justify-content: space-between;  
-        align-items: baseline;      
-    }
 
-    section>div{
-        display: grid;                       
-        grid-template-columns: repeat(3, 1fr); 
-    }
-} 
+
+
+@media screen and (max-width: 800px ) {
+  .dish {
+    grid-template-columns: 1fr;
+  }
+  nav {
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 600px ) {
+  h1 {
+    text-align: center;
+  }
+  .dish {
+    grid-template-columns: 1fr;
+  }
+  nav {
+    flex-direction: column;
+    align-items: center;
+    font-size: calc(3rem + 4px);
+  }
+}
+
